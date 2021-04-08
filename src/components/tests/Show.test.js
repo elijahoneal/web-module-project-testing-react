@@ -5,7 +5,7 @@ import Episodes from '../Episodes'
 import Show from './../Show';
 
 
-const testShow = {
+export const testShow = {
     //add in approprate test data structure here.
     name: 'newShow',
     image: 'https://www.pexels.com/photo/laptop-on-desk-near-lush-houseplant-5797997/',

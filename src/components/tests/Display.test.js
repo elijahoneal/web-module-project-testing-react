@@ -1,3 +1,45 @@
+import React from 'react'
+import { render , screen, waitFor } from '@testing-library/react'
+import Display from '../Display'
+import { testShow } from './Show.test'
+import { fetchShow as mockFetchShow } from '../../api/fetchShow'
+import userEvent from '@testing-library/user-event'
+
+
+jest.mock('../../api/fetchShow')
+
+test('Display renders', () => {
+    render(<Display/>)
+})
+
+test('fetches and renders show data', async () => {
+    render(<Display/>)
+    mockFetchShow.mockResolvedValueOnce({
+        data: testShow
+    })
+
+    const btn = screen.getByRole("button")
+    userEvent.click(btn)
+
+    await waitFor( () => {
+        const show = screen.getByTestId('show-container')
+        expect(show).toBeDefined();
+    } )
+})
+
+// test('amount of select options rendered is equal to the amount of seasons', async () => {
+//     render(<Display/>)
+//     const btn = screen.getByRole("button")
+//     userEvent.click(btn)
+
+//     await waitFor( () => {
+//         const show = screen.getByTestId('show-container')
+//         expect(show).toBeDefined();
+//     } )
+//     const seasons = screen.getAllByTestId('season-option')
+//     expect(seasons.length).toBe(4)
+// })
+
 
 
 
